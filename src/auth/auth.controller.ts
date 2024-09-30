@@ -12,6 +12,9 @@ import {
   ApiUnauthorizedResponse,
   ApiBody,
   ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiBadGatewayResponse,
+  ApiBadRequestResponse,
 } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
@@ -39,6 +42,17 @@ export class AuthController {
   async login(@Request() req): Promise<any> {
     const data = await this.authService.login(req.user);
     this.logger.info('get access token', { data: data });
+    return data;
+  }
+
+  @Post('register')
+  @ApiTags('auth')
+  @ApiCreatedResponse({ type: ResponseTokenDTO })
+  @ApiBadRequestResponse({ description: 'User already exists' })
+  @ApiBody({ type: LoginUsersDTO })
+  async register(@Request() req): Promise<any> {
+    const data = await this.authService.register(req.body);
+    this.logger.info('User registered and access token generated', { data: data });
     return data;
   }
 

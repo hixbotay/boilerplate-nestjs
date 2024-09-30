@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 import { UsersEntity } from './entities/users.entity';
 import { UsersDTO } from './dto/users.dto';
@@ -19,8 +20,10 @@ export class UsersService {
   }
 
   async create(data: CreateUsersDTO): Promise<UsersDTO> {
-    this.usersRepository.create(data);
-    const user = await this.usersRepository.save(data);
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const userData = { ...data, password: hashedPassword };
+    this.usersRepository.create(userData);
+    const user = await this.usersRepository.save(userData);
     return user;
   }
 
@@ -29,6 +32,9 @@ export class UsersService {
   }
 
   async update(id: number, data: UpdateUsersDTO): Promise<UsersDTO> {
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
     await this.usersRepository.update({ id }, data);
     return await this.usersRepository.findOne({ id });
   }
