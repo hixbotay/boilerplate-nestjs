@@ -154,6 +154,27 @@ paths:
                 $ref: "#/components/schemas/UnauthorizedDTO"
       tags:
         - auth
+  /register:
+    post:
+      operationId: AuthController_register
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginUsersDTO"
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseTokenDTO"
+        "400":
+          description: User already exists
+      tags:
+        - auth
   /me:
     get:
       operationId: AuthController_getMe

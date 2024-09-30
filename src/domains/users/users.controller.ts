@@ -22,16 +22,25 @@ import { UsersService } from './users.service';
 import { UsersDTO } from './dto/users.dto';
 import { CreateUsersDTO } from './dto/create-user.dto';
 import { UpdateUsersDTO } from './dto/update-user.dto';
+import { RedisCacheService } from 'src/cache/cache.service';
 
 @ApiTags('user')
 @Controller('user')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private cacheService: RedisCacheService) {}
 
   @ApiOkResponse({ type: [UsersDTO] })
   @Get()
   async showAllUsers(): Promise<UsersDTO[]> {
-    return this.usersService.showAll();
+    const cacheKey = 'all_users';
+    let cacheData = await this.cacheService.get(cacheKey);
+    if (cacheData) {
+      return JSON.parse(cacheData);
+    } else {
+      let users = await this.usersService.showAll();
+      await this.cacheService.set(cacheKey, JSON.stringify(users));
+      return users;
+    }
   }
 
   @ApiOkResponse({ type: [UsersDTO] })
@@ -54,7 +63,6 @@ export class UsersController {
     let start = Date.now();
     let i=0;
     while (Date.now() - start < 15000) {
-      await new Promise(resolve => setTimeout(resolve, 5));
       i++;
     }
     return {result:i};

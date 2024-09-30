@@ -13,6 +13,7 @@ dotenv.config();
       port: process.env.REDIS_PORT,
       db: process.env.REDIS_SLAVE_DATABASE_NUMBER,
       ttl: parseInt(process.env.REDIS_TIME_TO_LIVE),
+      max: parseInt(process.env.REDIS_MAX_ITEMS ?? '100000'),
     }),
   ],
   providers: [RedisCacheService],

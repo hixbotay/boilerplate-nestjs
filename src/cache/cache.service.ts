@@ -11,7 +11,7 @@ export class RedisCacheService {
 
   async set(key, value, ttl?: number) {
     if (ttl) {
-      await this.cache.set(key, value, { ttl });
+      await this.cache.set(key, value, ttl );
     } else {
       await this.cache.set(key, value);
     }
