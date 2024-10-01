@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './domains/users/users.module';
+import { UsersModule } from './modules/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { WinstonModule } from 'nest-winston';
 import { RedisCacheModule } from './cache/cache.module';
 import * as winston from 'winston';
@@ -13,6 +13,7 @@ import configService from './ormconfig.service';
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     UsersModule,
     AuthModule,
+    RedisCacheModule,
     WinstonModule.forRoot({
       transports: [
         new winston.transports.File(options.infoFile),
@@ -21,7 +22,6 @@ import configService from './ormconfig.service';
       ],
       exitOnError: false,
     }),
-    RedisCacheModule,
   ],
 })
 export class AppModule {}

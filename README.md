@@ -92,3 +92,19 @@ This API uses the following project layout:
 │   └── unit             unit test
 └── .env                 environment variables
 ```
+# document
+- docker: 
+	https://github.com/nntwelve/Boilerplate-NestJS/tree/part-1-dotenv-joi-husky-commitlint-docker
+	https://viblo.asia/p/setup-boilerplate-cho-du-an-nestjs-phan-1-team-co-nhieu-thanh-vien-env-joi-husky-commitlint-prettier-dockerizing-EbNVQxG2LvR#_3-dockerizing-15
+
+Summarry boilerplace: https://awesome-nestjs.com/resources/boilerplate.html
+Nest api with jwt, mysql: https://github.com/chaksaray/NestJS-REST-API-Boilerplate-with-JWT-and-Mysql
+nest api with jwt, mongodb, postgre, social auth, file upload, multilang: https://github.com/brocoders/nestjs-boilerplate/
+nest api with jwt, postgre, multilang: https://github.com/narhakobyan/awesome-nest-boilerplate/
+
+
+hotreload: https://docs.nestjs.com/recipes/hot-reload
+passport: 
+	https://www.passportjs.org/concepts/authentication/strategies/
+	https://docs.nestjs.com/recipes/passport
+authorize: https://docs.nestjs.com/security/authorization

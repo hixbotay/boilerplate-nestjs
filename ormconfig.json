@@ -7,11 +7,11 @@
   "database": "boilerplate-nodejs",
   "logging": false,
   "entities": [
-    "/usr/src/app/src/**/**/**/*.entity.{ts,js}"
+    "D:\\laragon\\www\\boilerplate\\nestjs\\src\\**\\**\\**\\*.entity.{ts,js}"
   ],
   "migrationsTableName": "migration",
   "migrations": [
-    "/usr/src/app/migrations/*.ts"
+    "D:\\laragon\\www\\boilerplate\\nestjs\\migrations\\*.ts"
   ],
   "cli": {
     "migrationsDir": "./mysql/migrations"

@@ -10,6 +10,7 @@ import {
   NotFoundException,
   ParseIntPipe,
   Request,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -23,6 +24,8 @@ import { UsersDTO } from './dto/users.dto';
 import { CreateUsersDTO } from './dto/create-user.dto';
 import { UpdateUsersDTO } from './dto/update-user.dto';
 import { RedisCacheService } from 'src/cache/cache.service';
+import { PolicyGuard } from '../auth/role/policy.guard';
+import { Policy } from '../auth/role/policy.decorator';
 
 @ApiTags('user')
 @Controller('user')
@@ -68,6 +71,8 @@ export class UsersController {
     return {result:i};
   }
 
+  @UseGuards(JwtAuthGuard, PolicyGuard)
+  @Policy('user_create')
   @ApiCreatedResponse({ type: UsersDTO })
   @ApiBadRequestResponse()
   @Post()

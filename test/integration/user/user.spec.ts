@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
-import { UsersModule } from '../../../src/domains/users/users.module';
+import { UsersModule } from '../../../src/modules/users/users.module';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { UsersEntity } from '../../../src/domains/users/entities/users.entity';
+import { UsersEntity } from '../../../src/modules/users/entities/users.entity';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
